@@ -1,0 +1,126 @@
+// Prisma schema — senior-database-architect + senior-security (RLS)
+// Run: npx prisma migrate dev --name init ; npx prisma generate
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tenant {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  classes   Class[]
+  users     User[]
+  ruleConfigs RuleConfig[]
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  role      String   // admin | teacher | student — RBAC, enforced in middleware/security.js:authGuard
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+  createdAt DateTime @default(now())
+  @@index([tenantId, role])
+}
+
+model Class {
+  id        String   @id @default(cuid())
+  name      String
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+  students  Student[]
+  @@unique([tenantId, name])
+}
+
+model Subject {
+  code         String  @id
+  name         String
+  hasPractical Boolean
+  theoryMax    Int     @default(75)
+  practicalMax Int     @default(25)
+  // No tenant — subjects are global per board; tenant can extend via RuleConfig
+}
+
+model Student {
+  id        String   @id
+  name      String
+  classId   String
+  class     Class    @relation(fields: [classId], references: [id])
+  optional  String   // FK to Subject.code
+  tenantId  String
+  marks     Mark[]
+  result    Result?
+  createdAt DateTime @default(now())
+  @@index([tenantId, classId])
+  @@index([classId])
+}
+
+model Mark {
+  id          String  @id @default(cuid())
+  studentId   String
+  student     Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  subjectCode String
+  subject     Subject @relation(fields: [subjectCode], references: [code])
+  theory      Int?
+  practical   Int?
+  isAbsent    Boolean @default(false)
+  total       Int?
+  gradePoint  Float
+  isFail      Boolean
+  rule        String  // R-11 trace
+  tenantId    String
+  @@unique([studentId, subjectCode])
+  @@index([studentId])
+  @@index([tenantId, subjectCode])
+}
+
+model Result {
+  studentId           String  @id
+  student             Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  finalGPA            Float
+  letter              String
+  isFail              Boolean
+  sumCompulsory       Float
+  optionalContribution Float
+  uncappedGPA         Float
+  failureCause        String?
+  trace               Json    // FullStudentResult JSON
+  status              String  @default("DRAFT") // DRAFT|PENDING_VERIFICATION|VERIFIED|PUBLISHED|LOCKED
+  verifiedBy          String?
+  verifiedAt          DateTime?
+  publishedAt         DateTime?
+  tenantId            String
+  @@index([tenantId, status])
+  @@index([status])
+  // RLS: tenant isolation via tenantId — see migration RLS policy
+}
+
+model RuleConfig {
+  version       Int      @id @default(autoincrement())
+  tenantId      String?
+  tenant        Tenant?  @relation(fields: [tenantId], references: [id])
+  payload       Json
+  effectiveFrom DateTime @default(now())
+  createdBy     String
+  createdAt     DateTime @default(now())
+  @@index([tenantId, effectiveFrom])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  tenantId  String?
+  actor     String
+  action    String   // verify, publish, rule.update, calculate
+  target    String   // caseId, studentId, rules
+  payload   Json?
+  at        DateTime @default(now())
+  @@index([tenantId, at])
+  @@index([action, at])
+  @@index([target])
+  // Append-only, no UPDATE/DELETE — enforced via trigger in migration
+}

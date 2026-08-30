@@ -1,9 +1,9 @@
 # ResultIQ — Deterministic GPA Engine & Executive Result Verification System
 
-[![Build & Test Status](https://img.shields.io/badge/Vitest-41%2F41%20Passed-00875A?style=for-the-badge&logo=vitest&logoColor=white)](problem_08/tests)
-[![Next.js](https://img.shields.io/badge/Next.js-15.5.9%20App%20Router-000000?style=for-the-badge&logo=next.js&logoColor=white)](problem_08/apps/web)
-[![Architecture](https://img.shields.io/badge/Architecture-Clean%20%2F%20Hexagonal-2684FF?style=for-the-badge)](problem_08/docs/ARCHITECTURE.md)
-[![License](https://img.shields.io/badge/License-MIT-6554C0?style=for-the-badge)](problem_08/LICENSE)
+[![Build & Test Status](https://img.shields.io/badge/Vitest-41%2F41%20Passed-00875A?style=for-the-badge&logo=vitest&logoColor=white)](file:///d:/El%20Drago/problem_08/tests)
+[![Next.js](https://img.shields.io/badge/Next.js-15.5.9%20App%20Router-000000?style=for-the-badge&logo=next.js&logoColor=white)](file:///d:/El%20Drago/problem_08/apps/web)
+[![Architecture](https://img.shields.io/badge/Architecture-Clean%20%2F%20Hexagonal-2684FF?style=for-the-badge)](file:///d:/El%20Drago/problem_08/docs/ARCHITECTURE.md)
+[![License](https://img.shields.io/badge/License-MIT-6554C0?style=for-the-badge)](file:///d:/El%20Drago/problem_08/LICENSE)
 
 An enterprise-grade, deterministic school result processing and GPA calculation engine engineered for high-throughput batch grading across complex academic curricula (6 compulsory + 1 optional subject with theoretical and practical mark splits). 
 
@@ -86,8 +86,8 @@ The engine adheres strictly to deterministic grading specifications:
 ### 1. Installation & Test Suite
 ```bash
 # Clone the repository
-git clone https://github.com/iamafridi/ish26--Team-El-Drago---Problem-Set-2.git
-cd ish26--Team-El-Drago---Problem-Set-2/problem_08
+git clone https://github.com/iamafridi/ish26--Team-El-Drago---Problem-Set-1.git
+cd ish26--Team-El-Drago---Problem-Set-1/problem_08
 
 # Install dependencies
 npm install
@@ -108,7 +108,7 @@ npm run dev:web
 ### 3. CLI Batch Processing
 Process large school datasets directly from the command line:
 ```bash
-node src/adapters/controllers/CliController.js "../P08_school_results_public.json" --output ./output
+node src/adapters/controllers/CliController.js "D:/El Drago/P08_school_results_public.json" --output ./output
 ```
 
 ---
