@@ -1,0 +1,15 @@
+{
+  "name": "el-drago-workspace",
+  "version": "1.0.0",
+  "description": "ResultIQ Deterministic GPA Engine & Executive Result Verification System",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix problem_08 run dev",
+    "dev:web": "npm --prefix problem_08 run dev:web",
+    "test": "npm --prefix problem_08 test",
+    "test:enterprise": "npm --prefix problem_08 run test:enterprise",
+    "build": "npm --prefix problem_08 run build",
+    "start": "npm --prefix problem_08 start",
+    "install:all": "npm --prefix problem_08 install && npm --prefix problem_08/apps/web install"
+  }
+}
