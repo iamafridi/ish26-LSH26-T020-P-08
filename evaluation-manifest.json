@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0",
+  "teamId": "LSH26-T020",
+  "problemId": "P08",
+  "problemName": "School Result Processing and GPA Engine",
+  "status": "planning",
+  "entrypoints": {
+    "application": null,
+    "source": null
+  },
+  "requiredFeatures": [
+    "monthly-salary-and-expenses",
+    "receipt-image-extraction-and-review",
+    "monthly-dashboard",
+    "spending-forecast-and-specific-insights",
+    "savings-pockets-and-dps-projection"
+  ],
+  "notes": ""
+}
