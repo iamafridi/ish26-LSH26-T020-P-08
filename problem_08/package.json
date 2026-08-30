@@ -1,0 +1,25 @@
+{
+  "name": "school-result-gpa-engine",
+  "version": "1.0.0",
+  "description": "School Result Processing and GPA Engine - Production Grade",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:enterprise": "vitest run tests/engine.spec.js tests/public_data.spec.js tests/security.spec.js",
+    "engine:check": "vitest run tests/engine.spec.js",
+    "process": "node src/adapters/cli.js \"D:/El Drago/P08_school_results_public.json\" --output ./output",
+    "lint": "echo \"no eslint configured — use: npx eslint src/  (add eslint to devDeps)\"",
+    "dev:api": "node --watch src/infrastructure/http/server.js",
+    "dev:web": "npm --prefix apps/web run dev",
+    "audit": "node src/adapters/cli.js \"D:/El Drago/P08_school_results_public.json\" --output ./output && npm test"
+  },
+  "dependencies": {
+    "decimal.js": "^10.4.3",
+    "zod": "^4.5.4"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.11"
+  }
+}
