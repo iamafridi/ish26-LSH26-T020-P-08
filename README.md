@@ -47,7 +47,7 @@ The engine adheres strictly to deterministic grading specifications:
 ```
                                   +---------------------------------------------+
                                   |            Frameworks & Drivers             |
-                                  |   Next.js 15 App Router (apps/web)          |
+                                  |   Next.js 16 App Router (apps/web)          |
                                   |   Node.js HTTP Server (src/infrastructure)  |
                                   +----------------------+----------------------+
                                                          |

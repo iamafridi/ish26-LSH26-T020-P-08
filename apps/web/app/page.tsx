@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState, useMemo } from "react";
-import { useRouter } from "next/navigation";
 
 type Summary = { 
   case_id: string; 
@@ -62,7 +61,6 @@ const VERIFIERS = [
 ];
 
 export default function Dashboard({ initialTab = "results" }: { initialTab?: "results" | "checking" }) {
-  const router = useRouter();
   const [cases, setCases] = useState<Summary[]>([]);
   const [current, setCurrent] = useState<string>("");
   const [summary, setSummary] = useState<Summary | null>(null);
@@ -241,21 +239,6 @@ export default function Dashboard({ initialTab = "results" }: { initialTab?: "re
             <span>Export CSV</span>
           </a>
 
-          {/* View Tab Toggle */}
-          <div style={{ display: "inline-flex", background: "#FFFFFF", padding: 3, borderRadius: "var(--radius-full)", border: "1px solid var(--border)", boxShadow: "var(--shadow-float)" }}>
-            <button
-              onClick={() => router.push("/ledger")}
-              className={`chart-toggle-pill ${tab === "results" ? "active" : ""}`}
-            >
-              Student Ledger
-            </button>
-            <button
-              onClick={() => router.push("/checking")}
-              className={`chart-toggle-pill ${tab === "checking" ? "active" : ""}`}
-            >
-              Checking Lists ({totalFlaggedCount})
-            </button>
-          </div>
         </div>
       </div>
 

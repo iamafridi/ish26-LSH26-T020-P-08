@@ -1,6 +1,6 @@
 /**
  * telemetry.js — Structured logs + OpenTelemetry stub (V2: @opentelemetry/sdk-node).
- * senior-performance + senior-devops
+ * Lightweight runtime telemetry helpers.
  */
 export function log(level, msg, fields = {}) {
   const entry = { level, msg, at: new Date().toISOString(), ...fields };

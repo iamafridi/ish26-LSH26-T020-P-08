@@ -1,6 +1,6 @@
 /**
  * RuleConfigPort — DIP: Domain depends on abstraction, not concrete file.
- * senior-system-designer: interface-spec, priority 7
+ * Defines the rule configuration interface used by the domain layer.
  */
 
 /**

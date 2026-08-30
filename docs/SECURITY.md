@@ -1,4 +1,4 @@
-# Security — senior-security-engineer
+# Security
 
 **Triggers:** `security, auth, vulnerability, threat-model` — priority 13
 
@@ -36,4 +36,4 @@
 - [ ] Add `helmet` middleware (V2)
 - [ ] Rate-limit `/calculate` (V2)
 
-*Reviewed by senior-security-engineer; no high findings in V1 stateless mode.*
+The stateless deployment profile is covered by the repository security tests.

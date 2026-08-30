@@ -1,5 +1,5 @@
 /**
- * security.spec.js — senior-security-engineer + senior-qa
+ * Security behavior and boundary validation tests.
  * Tests zod validation, helmet-like logic, rate-limit, RBAC, audit.
  */
 import { describe, it, expect, beforeEach } from 'vitest';

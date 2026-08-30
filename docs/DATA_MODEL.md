@@ -1,8 +1,7 @@
 # Data Model
-*Owner: senior-database-architect (schema, indexing, performance) — triggers: database, schema, sql*
 
 ## V1 (Stateless, File-Based)
-*Architect: senior-database-architect — V1 avoids DB for determinism; V2 design below is reviewed for query perf.*
+The current version avoids a database to preserve deterministic, portable evaluation.
 
 
 

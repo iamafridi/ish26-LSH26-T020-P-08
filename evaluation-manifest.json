@@ -6,7 +6,12 @@
   "status": "ready",
   "entrypoints": {
     "application": "apps/web",
-    "source": "src"
+    "source": "src",
+    "web": "/",
+    "ledger": "/ledger",
+    "checkingLists": "/checking",
+    "ruleConfiguration": "/admin",
+    "health": "/api/health"
   },
   "requiredFeatures": [
     "deterministic-gpa-engine",

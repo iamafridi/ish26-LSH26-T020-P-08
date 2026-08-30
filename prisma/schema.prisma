@@ -1,4 +1,4 @@
-// Prisma schema — senior-database-architect + senior-security (RLS)
+// Prisma schema for the optional persistent deployment profile.
 // Run: npx prisma migrate dev --name init ; npx prisma generate
 generator client {
   provider = "prisma-client-js"

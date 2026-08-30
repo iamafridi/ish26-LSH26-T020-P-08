@@ -1,4 +1,4 @@
-# Backend — senior-backend-engineer
+# Backend
 
 **Triggers:** `api, backend, service, business-logic` — priority 1, essential, fallback_chain [flash, musespark]
 
@@ -31,4 +31,4 @@
 - Add Zod, RBAC guard on `PUT`, rate-limit, audit log (see `docs/SECURITY.md:1`).
 - Swap vanilla HTTP for Fastify + OpenTelemetry (see `docs/PERFORMANCE.md:1`).
 
-*Built by senior-backend-engineer; verified against `tests/engine.spec.js:1` 31/31.*
+Verified by the automated engine and public-data test suites.

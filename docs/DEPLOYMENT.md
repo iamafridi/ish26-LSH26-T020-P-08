@@ -1,90 +1,76 @@
-# Deployment — From Local to Production
+# Deployment Guide
 
-## Local Quickstart (Stateless)
+## Supported runtime
 
-```bash
-cd problem_08
-npm install
-npm test                          # 31 tests, 1765 rows
-node src/adapters/cli.js ../P08_school_results_public.json --output ./output   # batch
-node src/infrastructure/server.js # API at http://localhost:3000 + frontend at /index.html
-# or: npm run dev:api
-```
+- Node.js 20.9 or newer (Node.js 22 LTS recommended)
+- npm 10 or newer
+- Stateless Next.js deployment
 
-Open `http://localhost:3000` → Office console (needs API running, else falls back to static `output/`).
-
-CLI options:
-```bash
-node src/adapters/cli.js ../P08_school_results_public.json --output ./output --case PUB-01
-node src/adapters/cli.js ../P08_school_results_public.json --output ./output --case PUB-01 --student S005
-node src/adapters/cli.js ../P08_school_results_public.json --check-only --case PUB-01
-```
-
-## Docker (Production Image)
+## Local verification
 
 ```bash
-docker build -t gpa-engine:1.0.0 .
-docker run -p 3000:3000 -v $(pwd)/P08_school_results_public.json:/app/P08_school_results_public.json:ro -v $(pwd)/output:/app/output gpa-engine:1.0.0
-# healthcheck: wget -qO- http://localhost:3000/health
+npm ci
+npm test
+npm run build
+npm run dev
 ```
 
-## docker-compose
+Open `http://localhost:3000`. Health is available at
+`http://localhost:3000/api/health`.
+
+To generate the complete Problem 8 evaluation artifacts locally:
 
 ```bash
-docker-compose up --build           # api only (stateless)
-docker-compose --profile with-db up # + postgres + redis for V2
-docker-compose down -v
+npm run process
 ```
 
-`docker-compose.yml` already defines `db` (postgres:16) and `redis` (7) under `profiles: ["with-db"]`.
+This processes all 25 supplied cases and 1765 student records into `output/`.
 
-## Environment
+## Vercel deployment
 
-See `.env.example`. Key vars:
-- `PORT` (3000), `INPUT_PATH` (/app/P08_school_results_public.json), `NODE_ENV`.
+The repository includes `vercel.json`, and the Next.js configuration explicitly
+includes the official Problem 8 dataset and rule configuration in serverless output
+tracing.
 
-## CI (GitHub Actions sketch)
+### Dashboard workflow
 
-```yaml
-name: ci
-on: [push, pull_request]
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: npm, cache-dependency-path: problem_08/package.json }
-      - run: npm ci
-        working-directory: problem_08
-      - run: npm test
-        working-directory: problem_08
-      - run: node src/adapters/cli.js ../P08_school_results_public.json --output ./output
-        working-directory: problem_08
-  docker:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - run: docker build -t gpa-engine:${{ github.sha }} problem_08
-      - run: docker run -d -p 3000:3000 gpa-engine:${{ github.sha }} && sleep 3 && curl -f http://localhost:3000/health
+1. Import the GitHub repository into Vercel.
+2. Leave the project root at the repository root.
+3. Framework preset: Next.js.
+4. Install command: `npm install`.
+5. Build command: `npm run build`.
+6. Output directory: `apps/web/.next`.
+7. Deploy and verify `/api/health`, `/`, `/ledger`, `/checking`, and `/admin`.
+
+### CLI workflow
+
+```bash
+npx vercel@latest
+npx vercel@latest --prod
 ```
 
-## Production Path (Fly.io / Railway / Render / AWS ECS)
+The web deployment is stateless. Rule changes made through the admin console are
+held in the active serverless instance and should be treated as a demonstration.
+For durable rule administration, store versioned rules in a database or managed
+configuration service and replace the in-memory adapter.
 
-1. Push image to registry.
-2. Set `INPUT_PATH` to mounted volume or S3 path (V2: stream from S3).
-3. Put CloudFront / NGINX in front, TLS, rate-limit.
-4. Add OIDC auth guard on `PUT /api/config/rules` and `POST /api/calculate`.
-5. Enable DB: run `npx prisma migrate deploy`, point `DATABASE_URL`, enable RLS, backups PITR.
-6. Observability: OpenTelemetry → Prometheus/Grafana + Loki + Sentry; alert on `health` failure and `practicalFailed` spikes.
+## Docker deployment
 
-## Release Checklist (R-29)
+```bash
+docker build -t resultiq:1.0.0 .
+docker run --rm -p 3000:3000 resultiq:1.0.0
+```
 
-- [ ] `npm test` green (31/31)
-- [ ] `node src/adapters/cli.js` produces 25 case outputs, 1765 traces
-- [ ] `curl /health` ok
-- [ ] Frontend tabs render, trace drawer shows failureCause for high-average fails
-- [ ] `checking_lists.json` counts match CSV and table filters
-- [ ] Docker image builds, healthcheck passes
-- [ ] Docs updated: PRD, RULE_ENGINE, API_SPEC, DATA_MODEL, DEPLOYMENT
+Verify `http://localhost:3000/api/health` after startup.
+
+## Release checklist
+
+- [ ] `EVENT.md` identifies team `LSH26-T020` and problem `P08`.
+- [ ] `evaluation-manifest.json` is valid JSON and lists all required features.
+- [ ] `npm test` passes all 41 tests.
+- [ ] `npm run build` completes without errors or warnings.
+- [ ] `npm audit --audit-level=moderate` reports zero vulnerabilities.
+- [ ] `npm run process` produces 25 case outputs and 1765 traces.
+- [ ] Dashboard, ledger, checking lists, admin, docs, CSV, and trace routes respond.
+- [ ] Mobile navigation and horizontally scrollable result tables are usable.
+- [ ] `LICENSES.md`, `LICENSE`, and submission documentation are present.

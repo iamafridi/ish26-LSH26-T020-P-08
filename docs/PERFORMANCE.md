@@ -1,4 +1,4 @@
-# Performance — senior-performance-engineer
+# Performance
 
 **Triggers:** `performance, profiling, latency, optimization` — priority 26
 
@@ -33,4 +33,4 @@ node --prof-process isolate-*.log > profile.txt
 - 100k: BullMQ for async `POST /calculate`, Redis cache `processFile`, CDN for `output/`.
 - Lighthouse CI threshold: `performance 90, accessibility 90` via `lighthouse-ci` in GitHub Actions (see `docs/DEPLOYMENT.md:1`).
 
-*No regressions; engine is CPU-bound but trivial for 1765. Profiled by senior-performance-engineer.*
+The engine is CPU-bound and completes the supplied 1765-record dataset within the documented budget.

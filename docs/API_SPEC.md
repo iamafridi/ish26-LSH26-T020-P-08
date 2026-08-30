@@ -1,12 +1,11 @@
 # API Spec
-*Owner: senior-system-designer (interface-spec) + senior-backend-engineer (implementation) — triggers: interface-spec, component-design, api*
 
 Base URL: `http://localhost:3000` (or Docker `http://api:3000`)
 
 ## Health
 
 ```
-GET /health → { status:"ok", version:"1.0.0", uptime, cases }
+GET /api/health → { status:"ok", version:"1.0.0-next", uptime, cases }
 ```
 
 ## Config (Admin)
@@ -33,16 +32,6 @@ GET /api/cases/:caseId/trace/:studentId → FullStudentResult (single)
 GET /api/cases/:caseId/csv → text/csv attachment
 ```
 
-## Calculate (ad-hoc)
-
-```
-POST /api/calculate
-Content-Type: application/json
-Body: { subjects:[{code,name,practical}], compulsory:["BAN",…], students:[{id,name,class,optional,marks:{}}] }
-  or { caseData: {…} }
-→ { summary, checkingLists, results }
-```
-
 ### FullStudentResult shape
 
 ```json
@@ -67,17 +56,19 @@ Body: { subjects:[{code,name,practical}], compulsory:["BAN",…], students:[{id,
 400 { error:"Missing subjects/compulsory/students" }
 ```
 
-## Static Frontend
+## Frontend Routes
 
 ```
-GET /           → 302 /index.html
-GET /index.html → Office console (tabs, drawer traces, admin editor)
-GET /style.css, /app.js
+GET /          → Dashboard
+GET /ledger    → Student ledger
+GET /checking  → Pre-publish checking lists
+GET /admin     → Rule configuration
+GET /docs      → Documentation index
 ```
 
 For production, add auth (Bearer on PUT), rate-limit, OpenTelemetry traces.
 
-## Component Interfaces (senior-system-designer)
+## Component Interfaces
 
 **Processor:**
 ```ts

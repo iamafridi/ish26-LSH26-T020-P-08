@@ -1,10 +1,9 @@
 # PRD — School Result Processing & GPA Engine
-*Owner: senior-product-manager (strategy) + requirement-analyzer (discovery) — priority 5/0*
 
 ## 1. Problem Statement
 School needs deterministic, auditable result processing for ≥60 students across 2 classes (6 compulsory + 1 optional fourth subject). Subjects with practical carry separate theory (75) + practical (25). Office requires per-student trace and pre-publish checking lists. Two personas: Admin (rule owner) and Office/Teacher (verifier) plus Student/Parent viewer.
 
-*Capability map & invariants: see `docs/REQUIREMENTS.md:1` (requirement-analyzer output).*
+Capability map and invariants are documented in `docs/REQUIREMENTS.md`.
 
 ## 2. Goals
 - **Correctness:** Implement R-11, R-12, R-13, R-10 exactly; unit-test 8 hard edges + 1765 public rows.

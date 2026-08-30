@@ -1,5 +1,4 @@
 # Test Plan
-*Owner: senior-qa-architect (quality gate, priority 3 essential) — triggers: testing, qa, test-strategy*
 
 ## Quality Gates
 
@@ -90,7 +89,7 @@ curl -X POST http://localhost:3000/api/calculate -H 'Content-Type: application/j
 
 Add more synthetic in `engine.spec.js` E07/E08 for determinism.
 
-## QA Strategy (senior-qa-architect)
+## QA Strategy
 
 **Framework:** Vitest `vitest.config.js:1`, ESM, no mocks for domain (pure). `tests/engine.spec.js:1` covers R-11/R-12/R-13, 8 hard edges, multi-list. `tests/public_data.spec.js:1` is integration over `D:/El Drago/P08_school_results_public.json:1` (1765 rows) checking invariants (passed+failed==total, AB handling, cap, checking counts).
 
@@ -102,7 +101,7 @@ Add more synthetic in `engine.spec.js` E07/E08 for determinism.
 
 **Automation:** CI in `docs/DEPLOYMENT.md:1` runs `npm test` + batch + `curl /health`.
 
-## Visual QA (visual-qa agent)
+## Visual QA
 
 - Pixel: dark theme vars, table sticky header, badge colors (F red, PASS green)
 - Responsive: `grid3` → 1col at 900px, `grid2` → 1col at 700px

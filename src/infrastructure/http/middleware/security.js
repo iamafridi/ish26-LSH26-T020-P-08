@@ -1,5 +1,5 @@
 /**
- * security.js — senior-security-engineer: helmet, rate-limit, RBAC, validation.
+ * Security headers, rate limiting, authorization, and validation.
  */
 
 // Helmet-like headers (no dep)

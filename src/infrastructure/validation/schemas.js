@@ -1,6 +1,6 @@
 /**
  * validation.js — Zod schemas, replaces throw-only in engine.js:55 with 400 details.
- * senior-backend + senior-security
+ * Runtime validation schemas for API boundaries.
  */
 import { z } from 'zod';
 

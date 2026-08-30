@@ -1,6 +1,6 @@
 /**
  * audit.js — Append-only audit log, RLS-ready for V2 Postgres.
- * senior-security + senior-database
+ * Structured audit-event helpers.
  */
 import fs from 'node:fs';
 import path from 'node:path';

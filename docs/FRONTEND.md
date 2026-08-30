@@ -1,4 +1,4 @@
-# Frontend — senior-frontend-engineer
+# Frontend
 
 **Triggers:** `frontend, react, ui-implementation, client` — priority 2, essential, fallback_chain [musespark, flash]
 
@@ -23,4 +23,4 @@
 
 - Semantic table, keyboard drawer close, color contrast via CSS vars (`--bg:#0f172a` etc.), badges for F/PASS.
 
-*Built by senior-frontend-engineer; visual QA by `visual-qa` agent (pixel, responsive) — see `docs/DESIGN_SYSTEM.md:1`.*
+Responsive layout and interaction guidance is documented in `docs/DESIGN_SYSTEM.md`.

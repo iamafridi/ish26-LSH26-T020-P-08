@@ -1,4 +1,4 @@
--- Migration 0001_init — senior-database-architect
+-- Initial ResultIQ database migration
 -- RLS + append-only audit + indexes
 
 -- Enable RLS
