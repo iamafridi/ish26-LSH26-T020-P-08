@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
 
 type Summary = { 
   case_id: string; 
@@ -60,7 +61,8 @@ const VERIFIERS = [
   { initial: "S", name: "Sujon", role: "Lead Verifier (You)", color: "#00875A" },
 ];
 
-export default function Dashboard() {
+export default function Dashboard({ initialTab = "results" }: { initialTab?: "results" | "checking" }) {
+  const router = useRouter();
   const [cases, setCases] = useState<Summary[]>([]);
   const [current, setCurrent] = useState<string>("");
   const [summary, setSummary] = useState<Summary | null>(null);
@@ -73,18 +75,10 @@ export default function Dashboard() {
   const [drawer, setDrawer] = useState<Student | null>(null);
   const [auditModalOpen, setAuditModalOpen] = useState(false);
   const [signedOff, setSignedOff] = useState(false);
-  const [tab, setTab] = useState<"results" | "checking">("results");
+  const [tab, setTab] = useState<"results" | "checking">(initialTab);
   const [chartView, setChartView] = useState<"distribution" | "summary">("distribution");
 
-  // Read URL query params on load (e.g. ?tab=checking)
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get("tab") === "checking") {
-        setTab("checking");
-      }
-    }
-  }, []);
+  useEffect(() => setTab(initialTab), [initialTab]);
 
   useEffect(() => {
     fetch("/api/cases")
@@ -250,13 +244,13 @@ export default function Dashboard() {
           {/* View Tab Toggle */}
           <div style={{ display: "inline-flex", background: "#FFFFFF", padding: 3, borderRadius: "var(--radius-full)", border: "1px solid var(--border)", boxShadow: "var(--shadow-float)" }}>
             <button
-              onClick={() => setTab("results")}
+              onClick={() => router.push("/ledger")}
               className={`chart-toggle-pill ${tab === "results" ? "active" : ""}`}
             >
               Student Ledger
             </button>
             <button
-              onClick={() => setTab("checking")}
+              onClick={() => router.push("/checking")}
               className={`chart-toggle-pill ${tab === "checking" ? "active" : ""}`}
             >
               Checking Lists ({totalFlaggedCount})

@@ -1,5 +1,7 @@
 import "./globals.css";
 import Link from "next/link";
+import { Suspense } from "react";
+import ActiveNavLink from "./ActiveNavLink";
 
 export const metadata = {
   title: "ResultIQ — Executive GPA & Result Processing Engine",
@@ -8,7 +10,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body>
         <div className="canvas-wrapper">
           {/* 1. Floating Pill Top Navbar */}
@@ -25,23 +27,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Link>
 
             {/* Center Pill Nav Links */}
-            <nav className="header-nav-pill-container">
-              <Link href="/" className="header-nav-item active">
+            <Suspense fallback={<nav className="header-nav-pill-container" />}>
+            <nav className="header-nav-pill-container" aria-label="Primary navigation">
+              <ActiveNavLink href="/" className="header-nav-item" mode="dashboard">
                 Dashboard
-              </Link>
-              <a href="/?tab=checking" className="header-nav-item">
+              </ActiveNavLink>
+              <ActiveNavLink href="/checking" className="header-nav-item" mode="checking">
                 Checking Lists
-              </a>
-              <Link href="/admin" className="header-nav-item">
+              </ActiveNavLink>
+              <ActiveNavLink href="/admin" className="header-nav-item" mode="admin">
                 Rule Config
-              </Link>
-              <Link href="/#ledger" className="header-nav-item">
+              </ActiveNavLink>
+              <ActiveNavLink href="/ledger" className="header-nav-item" mode="ledger">
                 Student Ledger
-              </Link>
-              <Link href="/docs" className="header-nav-item">
+              </ActiveNavLink>
+              <ActiveNavLink href="/docs" className="header-nav-item" mode="docs">
                 Documentation
-              </Link>
+              </ActiveNavLink>
             </nav>
+            </Suspense>
 
             {/* Right Group: Search, Notification Bell, User Avatar */}
             <div className="topbar-right-group">
@@ -74,35 +78,35 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <aside className="floating-sidebar-rail">
               <div className="rail-icon-stack">
                 {/* Active Grid Icon */}
-                <Link href="/" className="rail-icon-btn active" title="Dashboard">
+                <ActiveNavLink href="/" className="rail-icon-btn" mode="dashboard" title="Dashboard">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="3" y="3" width="7" height="7" rx="2"/>
                     <rect x="14" y="3" width="7" height="7" rx="2"/>
                     <rect x="14" y="14" width="7" height="7" rx="2"/>
                     <rect x="3" y="14" width="7" height="7" rx="2"/>
                   </svg>
-                </Link>
+                </ActiveNavLink>
 
                 {/* Analytics / Chart Icon */}
-                <Link href="/#ledger" className="rail-icon-btn" title="Analytics Ledger">
+                <ActiveNavLink href="/ledger" className="rail-icon-btn" mode="ledger" title="Analytics Ledger">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M3 3v18h18"/>
                     <path d="M18 17V9"/>
                     <path d="M13 17V5"/>
                     <path d="M8 17v-3"/>
                   </svg>
-                </Link>
+                </ActiveNavLink>
 
                 {/* Case / Wallet Icon */}
-                <a href="/?tab=checking" className="rail-icon-btn" title="Checking Lists">
+                <ActiveNavLink href="/checking" className="rail-icon-btn" mode="checking" title="Checking Lists">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="m9 11 3 3L22 4"/>
                     <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
                   </svg>
-                </a>
+                </ActiveNavLink>
 
                 {/* Rule Config Sliders Icon */}
-                <Link href="/admin" className="rail-icon-btn" title="Rule Configuration">
+                <ActiveNavLink href="/admin" className="rail-icon-btn" mode="admin" title="Rule Configuration">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="4" x2="4" y1="21" y2="14"/>
                     <line x1="4" x2="4" y1="10" y2="3"/>
@@ -114,20 +118,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <line x1="9" x2="15" y1="8" y2="8"/>
                     <line x1="17" x2="23" y1="16" y2="16"/>
                   </svg>
-                </Link>
+                </ActiveNavLink>
 
-                <div className="rail-divider"></div>
-
-                {/* Document / Reports Icon */}
-                <a href="/api/cases" target="_blank" className="rail-icon-btn" title="JSON Cases API">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                    <polyline points="14 2 14 8 20 8"/>
-                    <line x1="16" x2="8" y1="13" y2="13"/>
-                    <line x1="16" x2="8" y1="17" y2="17"/>
-                    <polyline points="10 9 9 9 8 9"/>
-                  </svg>
-                </a>
               </div>
 
               {/* Bottom Settings & Logout Icons */}
