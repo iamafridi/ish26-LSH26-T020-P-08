@@ -1,9 +1,7 @@
-// lib/engine.ts — Next.js server-side wrapper around pure domain (reuses src/*)
-// This keeps the domain pure and lets Next.js API routes call it without extra HTTP hop.
-
-import { processFile, buildCheckingLists as buildLists } from "../../../src/application/services/ProcessorService.js";
-import { processCase } from "../../../src/domain/services/GpaEngine.js";
-import { defaultRuleConfig } from "../../../src/domain/ports/RuleConfigPort.js";
+// lib/engine.ts — Next.js server-side wrapper around pure domain engine
+import { processFile, buildCheckingLists as buildLists } from "../src/application/services/ProcessorService.js";
+import { processCase } from "../src/domain/services/GpaEngine.js";
+import { defaultRuleConfig } from "../src/domain/ports/RuleConfigPort.js";
 import path from "node:path";
 import fs from "node:fs";
 
@@ -34,8 +32,19 @@ export function getBatch() {
     if (fs.existsSync(INPUT_PATH)) {
       cached = processFile(INPUT_PATH);
     } else {
-      // Fallback empty batch for build time if dataset is not present
-      cached = { cases: [], globalSummary: { total_cases: 0, total_students: 0, total_passed: 0, total_failed: 0, overall_pass_rate_pct: 0, average_gpa_all: 0, average_gpa_passed_only: 0 } };
+      // Safe fallback batch for build time
+      cached = {
+        cases: [],
+        globalSummary: {
+          total_cases: 0,
+          total_students: 0,
+          total_passed: 0,
+          total_failed: 0,
+          overall_pass_rate_pct: 0,
+          average_gpa_all: 0,
+          average_gpa_passed_only: 0
+        }
+      };
     }
   }
   return cached;
