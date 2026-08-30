@@ -4,10 +4,10 @@
   "description": "ResultIQ Deterministic GPA Engine & Executive Result Verification System",
   "private": true,
   "scripts": {
-    "postinstall": "npm --prefix problem_08 install && npm --prefix problem_08/apps/web install",
-    "build": "npm --prefix problem_08 run build",
-    "start": "npm --prefix problem_08 start",
-    "dev": "npm --prefix problem_08 run dev",
-    "test": "npm --prefix problem_08 test"
+    "postinstall": "cd problem_08 && npm install && cd apps/web && npm install",
+    "build": "cd problem_08/apps/web && npm install && npm run build",
+    "start": "cd problem_08/apps/web && npm start",
+    "dev": "cd problem_08/apps/web && npm run dev",
+    "test": "cd problem_08 && npm test"
   }
 }
