@@ -87,4 +87,4 @@ jobs:
 - [ ] Frontend tabs render, trace drawer shows failureCause for high-average fails
 - [ ] `checking_lists.json` counts match CSV and table filters
 - [ ] Docker image builds, healthcheck passes
-- [ ] Docs updated: PRD, ARCHITECTURE, RULE_ENGINE, API_SPEC, DATA_MODEL, DEPLOYMENT
+- [ ] Docs updated: PRD, RULE_ENGINE, API_SPEC, DATA_MODEL, DEPLOYMENT

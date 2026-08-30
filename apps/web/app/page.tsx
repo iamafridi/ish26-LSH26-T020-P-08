@@ -527,6 +527,86 @@ export default function Dashboard() {
         </div>
       </div>
 
+      {/* Interactive performance intelligence */}
+      <section className="insights-grid" aria-label="Performance intelligence">
+        <div className="insight-card performance-ring-card">
+          <div className="insight-heading">
+            <div>
+              <span className="insight-kicker">Live outcome</span>
+              <h2>Batch performance</h2>
+            </div>
+            <span className="live-data-pill"><i /> Live data</span>
+          </div>
+          <div className="ring-content">
+            <button
+              className="performance-ring"
+              style={{ "--pass-angle": `${summary?.total ? (summary.passed / summary.total) * 360 : 0}deg` } as React.CSSProperties}
+              onClick={handlePassFilterClick}
+              type="button"
+              aria-label={`Filter ${summary?.passed || 0} passing students`}
+            >
+              <span><strong>{passRate}</strong><small>pass rate</small></span>
+            </button>
+            <div className="ring-legend">
+              <button type="button" onClick={handlePassFilterClick} className={filterRes === "PASS" ? "selected" : ""}>
+                <i className="legend-dot pass-dot" /><span>Passed</span><strong>{summary?.passed || 0}</strong>
+              </button>
+              <button type="button" onClick={handleFailFilterClick} className={filterRes === "FAIL" ? "selected" : ""}>
+                <i className="legend-dot fail-dot" /><span>Needs review</span><strong>{summary?.failed || 0}</strong>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="insight-card grade-bars-card">
+          <div className="insight-heading">
+            <div>
+              <span className="insight-kicker">Grade profile</span>
+              <h2>Performance by tier</h2>
+            </div>
+            <span className="insight-hint">Select a bar to filter</span>
+          </div>
+          <div className="horizontal-grade-bars">
+            {gradeDistribution.map((item) => (
+              <button
+                type="button"
+                key={item.grade}
+                onClick={() => handleGradeBarClick(item.grade)}
+                className={filterGrade === item.grade ? "selected" : ""}
+                title={`${item.count} students earned ${item.grade}`}
+              >
+                <span className="grade-label">{item.grade}</span>
+                <span className="grade-track"><i style={{ width: `${Math.max(item.pct, item.count ? 3 : 0)}%` }} /></span>
+                <strong>{item.count}</strong>
+                <small>{item.pct}%</small>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="insight-card audit-pulse-card">
+          <div className="insight-heading">
+            <div>
+              <span className="insight-kicker">Quality controls</span>
+              <h2>Audit pulse</h2>
+            </div>
+            <strong className="audit-total">{totalFlaggedCount}</strong>
+          </div>
+          <div className="audit-meter-list">
+            {[
+              ["Optional review", summary?.optionalFlagged || 0, "optional", "emerald"],
+              ["Practical fail", summary?.practicalFailed || 0, "practical", "coral"],
+              ["Absent record", summary?.absent || 0, "absent", "blue"],
+            ].map(([label, value, key, tone]) => (
+              <button type="button" key={String(key)} onClick={() => handleAuditCategoryFilter(String(key))}>
+                <span><b>{label}</b><strong>{value}</strong></span>
+                <i className={`audit-meter ${tone}`}><em style={{ width: `${Math.max(4, (Number(value) / Math.max(totalFlaggedCount, 1)) * 100)}%` }} /></i>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Bottom Full-Width Student Ledger Table */}
       {tab === "results" ? (
         <div className="ledger-bento-card" id="ledger">

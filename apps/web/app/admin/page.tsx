@@ -80,7 +80,7 @@ export default function AdminPage() {
         </div>
       </div>
 
-      <div className="bento-surface-card" style={{ marginTop: 20 }}>
+      <div className="bento-surface-card admin-config-card" style={{ marginTop: 20 }}>
         <div className="bento-card-topbar">
           <div>
             <div className="bento-header-title">Dynamic Rule Engine Parameters</div>
@@ -91,7 +91,7 @@ export default function AdminPage() {
           </span>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, marginTop: 24 }}>
+        <div className="admin-config-grid">
           {/* Left Column: Form Thresholds */}
           <div>
             <h4 style={{ fontSize: 15, fontWeight: 800, marginBottom: 18, color: "var(--text-main)" }}>
@@ -102,7 +102,7 @@ export default function AdminPage() {
               <label style={{ display: "block", fontSize: 13, fontWeight: 700, marginBottom: 6 }}>
                 Theory Minimum Pass Mark (R-10/R-12)
               </label>
-              <input
+              <input className="config-input"
                 type="number"
                 style={{ width: "100%", padding: "12px 16px", borderRadius: "var(--radius-md)", border: "1px solid var(--border)", background: "#F9FAFB", fontSize: 14, fontWeight: 600 }}
                 value={rules.passMarks.theory}
@@ -119,7 +119,7 @@ export default function AdminPage() {
               <label style={{ display: "block", fontSize: 13, fontWeight: 700, marginBottom: 6 }}>
                 Practical Minimum Pass Mark (R-10)
               </label>
-              <input
+              <input className="config-input"
                 type="number"
                 style={{ width: "100%", padding: "12px 16px", borderRadius: "var(--radius-md)", border: "1px solid var(--border)", background: "#F9FAFB", fontSize: 14, fontWeight: 600 }}
                 value={rules.passMarks.practical}
@@ -136,7 +136,7 @@ export default function AdminPage() {
               <label style={{ display: "block", fontSize: 13, fontWeight: 700, marginBottom: 6 }}>
                 GPA Divisor (Compulsory Subjects Count)
               </label>
-              <input
+              <input className="config-input"
                 type="number"
                 style={{ width: "100%", padding: "12px 16px", borderRadius: "var(--radius-md)", border: "1px solid var(--border)", background: "#F9FAFB", fontSize: 14, fontWeight: 600 }}
                 value={rules.gpa.divisor}
@@ -153,7 +153,7 @@ export default function AdminPage() {
               <label style={{ display: "block", fontSize: 13, fontWeight: 700, marginBottom: 6 }}>
                 GPA Cap (Maximum Allowed GPA)
               </label>
-              <input
+              <input className="config-input"
                 type="number"
                 step="0.01"
                 style={{ width: "100%", padding: "12px 16px", borderRadius: "var(--radius-md)", border: "1px solid var(--border)", background: "#F9FAFB", fontSize: 14, fontWeight: 600 }}
@@ -171,7 +171,7 @@ export default function AdminPage() {
               <label style={{ display: "block", fontSize: 13, fontWeight: 700, marginBottom: 6 }}>
                 Optional Subject Deduction Threshold
               </label>
-              <input
+              <input className="config-input"
                 type="number"
                 step="0.1"
                 style={{ width: "100%", padding: "12px 16px", borderRadius: "var(--radius-md)", border: "1px solid var(--border)", background: "#F9FAFB", fontSize: 14, fontWeight: 600 }}
@@ -223,7 +223,7 @@ export default function AdminPage() {
             <h4 style={{ fontSize: 15, fontWeight: 800, marginBottom: 18, color: "var(--text-main)" }}>
               Grading Scale (JSON Schema)
             </h4>
-            <textarea
+            <textarea className="config-editor"
               rows={16}
               style={{ width: "100%", padding: "14px 16px", borderRadius: "var(--radius-md)", border: "1px solid var(--border)", background: "#F9FAFB", fontSize: 13, fontFamily: "'JetBrains Mono', monospace", color: "var(--text-main)", resize: "vertical" }}
               value={JSON.stringify(rules.gradingScale, null, 2)}

@@ -29,18 +29,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/" className="header-nav-item active">
                 Dashboard
               </Link>
-              <Link href="/?tab=checking" className="header-nav-item">
+              <a href="/?tab=checking" className="header-nav-item">
                 Checking Lists
-              </Link>
+              </a>
               <Link href="/admin" className="header-nav-item">
                 Rule Config
               </Link>
-              <a href="#ledger" className="header-nav-item">
+              <Link href="/#ledger" className="header-nav-item">
                 Student Ledger
-              </a>
-              <a href="/docs/ARCHITECTURE.md" target="_blank" className="header-nav-item">
+              </Link>
+              <Link href="/docs" className="header-nav-item">
                 Documentation
-              </a>
+              </Link>
             </nav>
 
             {/* Right Group: Search, Notification Bell, User Avatar */}
@@ -84,22 +84,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </Link>
 
                 {/* Analytics / Chart Icon */}
-                <a href="#ledger" className="rail-icon-btn" title="Analytics Ledger">
+                <Link href="/#ledger" className="rail-icon-btn" title="Analytics Ledger">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M3 3v18h18"/>
                     <path d="M18 17V9"/>
                     <path d="M13 17V5"/>
                     <path d="M8 17v-3"/>
                   </svg>
-                </a>
+                </Link>
 
                 {/* Case / Wallet Icon */}
-                <Link href="/?tab=checking" className="rail-icon-btn" title="Checking Lists">
+                <a href="/?tab=checking" className="rail-icon-btn" title="Checking Lists">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="m9 11 3 3L22 4"/>
                     <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
                   </svg>
-                </Link>
+                </a>
 
                 {/* Rule Config Sliders Icon */}
                 <Link href="/admin" className="rail-icon-btn" title="Rule Configuration">

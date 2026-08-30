@@ -71,16 +71,10 @@ Public dataset `P08_school_results_public.json` (25 cases, 1765 students) satisf
 - Per-student trace for all 1765 renders <50ms (pure functions).
 - Publish gate: 0 unverified publishes (state machine guard).
 
-## 10. Agent Coverage (R-29 docs)
-- requirement-analyzer → `docs/REQUIREMENTS.md:1`
-- senior-system-architect → `docs/ARCHITECTURE.md:1`
-- senior-system-designer → `docs/API_SPEC.md:1` + `docs/DATA_MODEL.md:1`
-- senior-backend/database → `src/domain/engine.js:1`, `src/application/processor.js:1`
-- senior-frontend/ui-designer → `apps/web/*:1` + `docs/DESIGN_SYSTEM.md:1`
-- senior-qa-architect → `docs/TEST_PLAN.md:1`
-- senior-security → `docs/SECURITY.md:1`
-- senior-performance → `docs/PERFORMANCE.md:1`
-- senior-devops/cloud → `docs/DEPLOYMENT.md:1` + `Dockerfile:1`
+## 10. Delivery Coverage
+Requirements, API contracts, data modeling, interface behavior, testing, security,
+performance, and deployment guidance are maintained in their respective source and
+documentation directories.
 
 ## 11. Risks & Dependencies (product-manager)
 - Rule misinterpretation → mitigation: `docs/RULE_ENGINE.md:1` as single source, 31 tests lock spec.

@@ -6,7 +6,7 @@ import path from "node:path";
 import fs from "node:fs";
 
 function resolveInputPath(): string {
-  if (process.env.INPUT_PATH && fs.existsSync(process.env.INPUT_PATH)) {
+  if (process.env.INPUT_PATH && fs.existsSync(/* turbopackIgnore: true */ process.env.INPUT_PATH)) {
     return process.env.INPUT_PATH;
   }
   const candidates = [
@@ -16,7 +16,7 @@ function resolveInputPath(): string {
     path.resolve(process.cwd(), "problem_08/P08_school_results_public.json")
   ];
   for (const c of candidates) {
-    if (fs.existsSync(c)) return c;
+    if (fs.existsSync(/* turbopackIgnore: true */ c)) return c;
   }
   return candidates[0];
 }
@@ -28,7 +28,7 @@ let cached: ReturnType<typeof processFile> | null = null;
 
 export function getBatch() {
   if (!cached) {
-    if (fs.existsSync(INPUT_PATH)) {
+    if (fs.existsSync(/* turbopackIgnore: true */ INPUT_PATH)) {
       cached = processFile(INPUT_PATH);
     } else {
       // Safe fallback batch for build time

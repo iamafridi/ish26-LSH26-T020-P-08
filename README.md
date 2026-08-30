@@ -1,8 +1,7 @@
 # ResultIQ — Deterministic GPA Engine & Executive Result Verification System
 
 [![Build & Test Status](https://img.shields.io/badge/Vitest-41%2F41%20Passed-00875A?style=for-the-badge&logo=vitest&logoColor=white)](./tests)
-[![Next.js](https://img.shields.io/badge/Next.js-15.5.9%20App%20Router-000000?style=for-the-badge&logo=next.js&logoColor=white)](./apps/web)
-[![Architecture](https://img.shields.io/badge/Architecture-Clean%20%2F%20Hexagonal-2684FF?style=for-the-badge)](./docs/ARCHITECTURE.md)
+[![Next.js](https://img.shields.io/badge/Next.js-16%20App%20Router-000000?style=for-the-badge&logo=next.js&logoColor=white)](./apps/web)
 [![License](https://img.shields.io/badge/License-MIT-6554C0?style=for-the-badge)](./LICENSE)
 
 An enterprise-grade, deterministic school result processing and GPA calculation engine engineered for high-throughput batch grading across complex academic curricula (6 compulsory + 1 optional subject with theoretical and practical mark splits). 
@@ -152,13 +151,12 @@ The engine provides RESTful Route Handlers under `/api/*`:
 
 ```
 ├── apps/
-│   └── web/                     # Next.js 15 App Router Web Application
+│   └── web/                     # Next.js App Router Web Application
 │       ├── app/                 # Pages, layout, globals.css & API route handlers
 │       └── lib/engine.ts        # Clean bridge to src/ domain engine
 ├── config/
 │   └── rules.json               # Dynamic engine rule thresholds & grading scale
 ├── docs/                        # Complete technical documentation suite
-│   ├── ARCHITECTURE.md          # System architecture and Hexagonal layout
 │   ├── API_SPEC.md              # OpenAPI 3.1 & REST contract specification
 │   ├── REQUIREMENTS.md          # Formal mapping of problem requirements
 │   ├── RULE_ENGINE.md           # Formal R-10, R-11, R-12, R-13 rule specs
