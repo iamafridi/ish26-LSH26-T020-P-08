@@ -3,17 +3,17 @@
   "teamId": "LSH26-T020",
   "problemId": "P08",
   "problemName": "School Result Processing and GPA Engine",
-  "status": "planning",
+  "status": "ready",
   "entrypoints": {
-    "application": null,
-    "source": null
+    "application": "apps/web",
+    "source": "src"
   },
   "requiredFeatures": [
-    "monthly-salary-and-expenses",
-    "receipt-image-extraction-and-review",
-    "monthly-dashboard",
-    "spending-forecast-and-specific-insights",
-    "savings-pockets-and-dps-projection"
+    "deterministic-gpa-engine",
+    "pre-publish-checking-lists",
+    "student-calculation-trace",
+    "batch-processing-cli-and-api",
+    "admin-rule-configuration"
   ],
-  "notes": ""
+  "notes": "Deterministic GPA Engine complying with R-10, R-11, R-12, R-13 rules. 41/41 tests passing."
 }

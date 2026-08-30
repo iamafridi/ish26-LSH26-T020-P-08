@@ -9,4 +9,4 @@ ENV PORT=3000
 ENV INPUT_PATH=/app/P08_school_results_public.json
 # Ensure output dir exists
 RUN mkdir -p /app/output
-CMD ["node", "src/infrastructure/server.js"]
+CMD ["node", "src/infrastructure/http/server.js"]

@@ -11,10 +11,9 @@ function resolveInputPath(): string {
   }
   const candidates = [
     path.resolve(process.cwd(), "P08_school_results_public.json"),
-    path.resolve(process.cwd(), "../../P08_school_results_public.json"),
     path.resolve(process.cwd(), "../P08_school_results_public.json"),
-    path.resolve(process.cwd(), "problem_08/P08_school_results_public.json"),
-    path.resolve("D:/El Drago/P08_school_results_public.json")
+    path.resolve(process.cwd(), "../../P08_school_results_public.json"),
+    path.resolve(process.cwd(), "problem_08/P08_school_results_public.json")
   ];
   for (const c of candidates) {
     if (fs.existsSync(c)) return c;

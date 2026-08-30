@@ -1,9 +1,9 @@
 # ResultIQ — Deterministic GPA Engine & Executive Result Verification System
 
-[![Build & Test Status](https://img.shields.io/badge/Vitest-41%2F41%20Passed-00875A?style=for-the-badge&logo=vitest&logoColor=white)](problem_08/tests)
-[![Next.js](https://img.shields.io/badge/Next.js-15.5.9%20App%20Router-000000?style=for-the-badge&logo=next.js&logoColor=white)](problem_08/apps/web)
-[![Architecture](https://img.shields.io/badge/Architecture-Clean%20%2F%20Hexagonal-2684FF?style=for-the-badge)](problem_08/docs/ARCHITECTURE.md)
-[![License](https://img.shields.io/badge/License-MIT-6554C0?style=for-the-badge)](problem_08/LICENSE)
+[![Build & Test Status](https://img.shields.io/badge/Vitest-41%2F41%20Passed-00875A?style=for-the-badge&logo=vitest&logoColor=white)](./tests)
+[![Next.js](https://img.shields.io/badge/Next.js-15.5.9%20App%20Router-000000?style=for-the-badge&logo=next.js&logoColor=white)](./apps/web)
+[![Architecture](https://img.shields.io/badge/Architecture-Clean%20%2F%20Hexagonal-2684FF?style=for-the-badge)](./docs/ARCHITECTURE.md)
+[![License](https://img.shields.io/badge/License-MIT-6554C0?style=for-the-badge)](./LICENSE)
 
 An enterprise-grade, deterministic school result processing and GPA calculation engine engineered for high-throughput batch grading across complex academic curricula (6 compulsory + 1 optional subject with theoretical and practical mark splits). 
 
@@ -54,7 +54,7 @@ The engine adheres strictly to deterministic grading specifications:
                                                          |
                                   +----------------------v----------------------+
                                   |            Adapters & Gateways              |
-                                  |   CliController.js   FileRuleGateway.js     |
+                                  |   cli.js             FileRuleGateway.js     |
                                   +----------------------+----------------------+
                                                          |
                                   +----------------------v----------------------+
@@ -72,7 +72,7 @@ The engine adheres strictly to deterministic grading specifications:
 ### Layer Responsibilities
 - **Domain Layer (`src/domain/`)**: Pure business logic containing `GpaEngine.js` and `GradingService.js`. Zero external dependencies.
 - **Application Layer (`src/application/`)**: Use cases and batch processing workflows (`ProcessorService.js`).
-- **Adapters Layer (`src/adapters/`)**: Interface controllers (`CliController.js`) and rule persistence gateways (`FileRuleGateway.js`).
+- **Adapters Layer (`src/adapters/`)**: Interface controllers (`cli.js`) and rule persistence gateways (`FileRuleGateway.js`).
 - **Infrastructure & Web (`src/infrastructure/`, `apps/web/`)**: Next.js App Router, Route Handlers, HTTP servers, telemetry, and security middleware.
 
 ---
@@ -87,7 +87,7 @@ The engine adheres strictly to deterministic grading specifications:
 ```bash
 # Clone the repository
 git clone https://github.com/iamafridi/ish26--Team-El-Drago---Problem-Set-2.git
-cd ish26--Team-El-Drago---Problem-Set-2/problem_08
+cd ish26--Team-El-Drago---Problem-Set-2
 
 # Install dependencies
 npm install
@@ -108,7 +108,11 @@ npm run dev:web
 ### 3. CLI Batch Processing
 Process large school datasets directly from the command line:
 ```bash
-node src/adapters/controllers/CliController.js "../P08_school_results_public.json" --output ./output
+# Using npm script
+npm run process
+
+# Or directly with node
+node src/adapters/cli.js "P08_school_results_public.json" --output ./output
 ```
 
 ---
@@ -147,11 +151,9 @@ The engine provides RESTful Route Handlers under `/api/*`:
 ## 📁 Project Directory Structure
 
 ```
-problem_08/
 ├── apps/
 │   └── web/                     # Next.js 15 App Router Web Application
 │       ├── app/                 # Pages, layout, globals.css & API route handlers
-│       ├── components/          # Reusable UI components
 │       └── lib/engine.ts        # Clean bridge to src/ domain engine
 ├── config/
 │   └── rules.json               # Dynamic engine rule thresholds & grading scale
@@ -166,7 +168,7 @@ problem_08/
 ├── src/                         # Pure Core Calculation Engine (Clean Layers)
 │   ├── domain/                  # GpaEngine.js, GradingService.js, entities, VOs
 │   ├── application/             # ProcessorService.js, ProcessCase use cases
-│   ├── adapters/                # CliController.js, FileRuleGateway.js
+│   ├── adapters/                # cli.js, FileRuleGateway.js
 │   └── infrastructure/          # Node HTTP server, rate limiter, security middleware
 ├── tests/                       # Vitest Test Suites (41 tests)
 │   ├── engine.spec.js           # Unit tests for edge cases, rounding & capping

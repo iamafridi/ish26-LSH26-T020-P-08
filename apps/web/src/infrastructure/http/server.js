@@ -18,8 +18,21 @@ import * as telemetry from '../telemetry/telemetry.js';
 import { healthHandler } from './routes/health.js';
 import * as cases from './routes/cases.js';
 
+function resolveInputPath() {
+  if (process.env.INPUT_PATH && fs.existsSync(process.env.INPUT_PATH)) return process.env.INPUT_PATH;
+  const candidates = [
+    path.resolve(process.cwd(), 'P08_school_results_public.json'),
+    path.resolve(process.cwd(), '../P08_school_results_public.json'),
+    path.resolve(process.cwd(), '../../P08_school_results_public.json')
+  ];
+  for (const c of candidates) {
+    if (fs.existsSync(c)) return c;
+  }
+  return path.resolve(process.cwd(), 'P08_school_results_public.json');
+}
+
 const PORT = process.env.PORT || 3000;
-const INPUT_PATH = process.env.INPUT_PATH || path.resolve('D:/El Drago/P08_school_results_public.json');
+const INPUT_PATH = resolveInputPath();
 let cached = null;
 function getBatch() {
   if (!cached) cached = processFile(INPUT_PATH);

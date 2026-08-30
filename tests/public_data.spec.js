@@ -4,9 +4,14 @@
  */
 import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { processCase } from '../src/domain/services/GpaEngine.js';
 
-const inputPath = 'D:/El Drago/P08_school_results_public.json';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const inputPath = process.env.INPUT_PATH || (fs.existsSync(path.resolve(process.cwd(), 'P08_school_results_public.json'))
+  ? path.resolve(process.cwd(), 'P08_school_results_public.json')
+  : path.resolve(__dirname, '../P08_school_results_public.json'));
 const data = JSON.parse(fs.readFileSync(inputPath, 'utf-8'));
 
 describe('public dataset: 25 cases, 1765 students', () => {
