@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "School Result Processing and GPA Engine - Production Grade",
   "type": "module",
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
     "build": "npm --prefix apps/web run build",
     "start": "npm --prefix apps/web start",
