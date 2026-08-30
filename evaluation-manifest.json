@@ -4,6 +4,7 @@
   "problemId": "P08",
   "problemName": "School Result Processing and GPA Engine",
   "status": "ready",
+  "submissionFile": "SUBMISSION.md",
   "entrypoints": {
     "application": "apps/web",
     "source": "src",

@@ -4,6 +4,9 @@
 [![Next.js](https://img.shields.io/badge/Next.js-16%20App%20Router-000000?style=for-the-badge&logo=next.js&logoColor=white)](./apps/web)
 [![License](https://img.shields.io/badge/License-MIT-6554C0?style=for-the-badge)](./LICENSE)
 
+Hackathon evaluation details and the final checklist are available in
+[`SUBMISSION.md`](./SUBMISSION.md).
+
 An enterprise-grade, deterministic school result processing and GPA calculation engine engineered for high-throughput batch grading across complex academic curricula (6 compulsory + 1 optional subject with theoretical and practical mark splits). 
 
 Features **Clean Architecture** (Uncle Bob / Hexagonal), rigorous R-10 through R-13 rule compliance, sub-millisecond calculation traces, and a modern **Bento & Floating Capsule Executive UI**.
