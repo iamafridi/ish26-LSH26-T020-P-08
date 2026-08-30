@@ -3,14 +3,10 @@
   "version": "1.0.0",
   "description": "ResultIQ Deterministic GPA Engine & Executive Result Verification System",
   "private": true,
-  "workspaces": [
-    "problem_08",
-    "problem_08/apps/web"
-  ],
   "scripts": {
-    "build": "npm --prefix problem_08/apps/web run build",
-    "start": "npm --prefix problem_08/apps/web start",
-    "dev": "npm --prefix problem_08/apps/web run dev",
+    "build": "next build",
+    "start": "next start",
+    "dev": "next dev",
     "test": "npm --prefix problem_08 test"
   },
   "dependencies": {

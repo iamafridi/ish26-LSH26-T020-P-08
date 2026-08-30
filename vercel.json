@@ -1,5 +1,0 @@
-{
-  "framework": "nextjs",
-  "buildCommand": "npm --prefix problem_08/apps/web run build",
-  "outputDirectory": "problem_08/apps/web/.next"
-}
